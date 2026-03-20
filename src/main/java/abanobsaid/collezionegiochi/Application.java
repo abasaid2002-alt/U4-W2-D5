@@ -67,11 +67,7 @@ public class Application {
         // ricerca per id
         System.out.println(" CERCA PER ID ");
         Gioco trovato = collezione.cercaPerId("VG1");
-        if (trovato != null) {
-            System.out.println("Gioco trovato: " + trovato);
-        } else {
-            System.out.println("Gioco non trovato");
-        }
+        System.out.println("Gioco trovato: " + trovato);
 
         System.out.println();
 
@@ -101,5 +97,37 @@ public class Application {
         System.out.println("Numero giochi da tavolo: " + collezione.contaGiochiDaTavolo());
         System.out.println("Gioco più costoso: " + collezione.giocoPiuCostoso());
         System.out.println("Prezzo medio: " + collezione.prezzoMedio());
+
+        System.out.println();
+
+        // rimozione
+        System.out.println(" RIMOZIONE ");
+        collezione.rimuoviGioco("GT2");
+
+        System.out.println("Lista aggiornata dopo la rimozione:");
+        for (Gioco g : collezione.getGiochi()) {
+            System.out.println(g);
+        }
+
+        System.out.println();
+
+        // aggiornamento
+        System.out.println(" AGGIORNAMENTO ");
+        Videogioco v1Aggiornato = new Videogioco(
+                "VG1",
+                "Fifa 25 Updated",
+                2025,
+                69.99,
+                "PS5",
+                70,
+                "Sport"
+        );
+
+        collezione.aggiornaGioco("VG1", v1Aggiornato);
+
+        System.out.println("Lista aggiornata dopo l'aggiornamento:");
+        for (Gioco g : collezione.getGiochi()) {
+            System.out.println(g);
+        }
     }
 }

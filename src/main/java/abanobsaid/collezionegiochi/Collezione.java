@@ -123,6 +123,38 @@ public class Collezione {
         return somma / giochi.size();
     }
 
+    public boolean rimuoviGioco(String id) {
+        // cerco il gioco e lo rimuovo
+        for (int i = 0; i < giochi.size(); i++) {
+            if (giochi.get(i).getId().equalsIgnoreCase(id)) {
+                giochi.remove(i);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean aggiornaGioco(String id, Gioco nuovoGioco) {
+        if (nuovoGioco == null) {
+            return false;
+        }
+
+        if (!nuovoGioco.getId().equalsIgnoreCase(id)) {
+            return false;
+        }
+
+        // cerco il gioco e lo sostituisco
+        for (int i = 0; i < giochi.size(); i++) {
+            if (giochi.get(i).getId().equalsIgnoreCase(id)) {
+                giochi.set(i, nuovoGioco);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public List<Gioco> getGiochi() {
         return giochi;
     }
