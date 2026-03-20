@@ -1,11 +1,12 @@
 package abanobsaid.collezionegiochi;
 
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
 
         Collezione collezione = new Collezione();
 
-        // creo un videogioco
         Videogioco v1 = new Videogioco(
                 "VG1",
                 "Fifa 25",
@@ -16,7 +17,16 @@ public class Application {
                 "Sport"
         );
 
-        // creo un gioco da tavolo
+        Videogioco v2 = new Videogioco(
+                "VG2",
+                "Resident Evil",
+                2024,
+                49.99,
+                "PC",
+                20,
+                "Horror"
+        );
+
         GiocoDaTavolo g1 = new GiocoDaTavolo(
                 "GT1",
                 "Monopoly",
@@ -26,39 +36,70 @@ public class Application {
                 90
         );
 
-        // test aggiunta
-        System.out.println(" TEST AGGIUNTA ");
-        System.out.println("Aggiunta v1: " + collezione.aggiungiGioco(v1));
-        System.out.println("Aggiunta g1: " + collezione.aggiungiGioco(g1));
+        GiocoDaTavolo g2 = new GiocoDaTavolo(
+                "GT2",
+                "Uno",
+                2019,
+                9.99,
+                4,
+                20
+        );
 
-        // provo ad aggiungere di nuovo lo stesso id
-        System.out.println("Aggiunta duplicato v1: " + collezione.aggiungiGioco(v1));
+        GiocoDaTavolo g3 = new GiocoDaTavolo(
+                "GT3",
+                "Scacchi",
+                2018,
+                19.99,
+                2,
+                60
+        );
+
+        // aggiunta giochi
+        System.out.println(" AGGIUNTA ");
+        System.out.println("Aggiunta v1: " + collezione.aggiungiGioco(v1));
+        System.out.println("Aggiunta v2: " + collezione.aggiungiGioco(v2));
+        System.out.println("Aggiunta g1: " + collezione.aggiungiGioco(g1));
+        System.out.println("Aggiunta g2: " + collezione.aggiungiGioco(g2));
+        System.out.println("Aggiunta g3: " + collezione.aggiungiGioco(g3));
 
         System.out.println();
 
-        // stampo tutti i giochi inseriti
-        System.out.println(" GIOCHI PRESENTI ");
-        for (Gioco g : collezione.getGiochi()) {
+        // ricerca per id
+        System.out.println(" CERCA PER ID ");
+        Gioco trovato = collezione.cercaPerId("VG1");
+        if (trovato != null) {
+            System.out.println("Gioco trovato: " + trovato);
+        } else {
+            System.out.println("Gioco non trovato");
+        }
+
+        System.out.println();
+
+        // ricerca per prezzo
+        System.out.println(" CERCA PER PREZZO ");
+        List<Gioco> giochiEconomici = collezione.cercaPerPrezzo(30);
+
+        for (Gioco g : giochiEconomici) {
             System.out.println(g);
         }
 
         System.out.println();
 
-        // test ricerca per id esistente
-        System.out.println(" TEST CERCA PER ID ");
-        Gioco trovato1 = collezione.cercaPerId("VG1");
-        if (trovato1 != null) {
-            System.out.println("Gioco trovato: " + trovato1);
-        } else {
-            System.out.println("Gioco non trovato");
+        // ricerca per numero giocatori
+        System.out.println(" CERCA PER NUMERO GIOCATORI ");
+        List<GiocoDaTavolo> giochiPer4 = collezione.cercaPerNumeroGiocatori(4);
+
+        for (GiocoDaTavolo g : giochiPer4) {
+            System.out.println(g);
         }
 
-        // test ricerca per id non esistente
-        Gioco trovato2 = collezione.cercaPerId("ABC");
-        if (trovato2 != null) {
-            System.out.println("Gioco trovato: " + trovato2);
-        } else {
-            System.out.println("Gioco non trovato");
-        }
+        System.out.println();
+
+        // statistiche
+        System.out.println(" STATISTICHE ");
+        System.out.println("Numero videogiochi: " + collezione.contaVideogiochi());
+        System.out.println("Numero giochi da tavolo: " + collezione.contaGiochiDaTavolo());
+        System.out.println("Gioco più costoso: " + collezione.giocoPiuCostoso());
+        System.out.println("Prezzo medio: " + collezione.prezzoMedio());
     }
 }
